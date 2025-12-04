@@ -153,3 +153,9 @@ cython_debug/
 
 # Backup directories
 *.backup/
+
+lesson_transcripts/
+linkedin_post_intro.md
+intro.png
+
+Neo4j-credentials.txt
