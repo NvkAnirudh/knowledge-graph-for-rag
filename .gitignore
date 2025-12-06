@@ -157,5 +157,6 @@ cython_debug/
 lesson_transcripts/
 linkedin_post_intro.md
 intro.png
+linkedin_posts/
 
 Neo4j-credentials.txt
