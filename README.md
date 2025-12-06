@@ -1,6 +1,34 @@
 # Graph RAG Learning Series
 
-Learning Graph RAG fundamentals using Neo4j and Cypher query language. Part of the SWYL (Share What You Learn) series.
+A hands-on learning journey exploring Graph RAG - combining knowledge graphs with retrieval augmented generation to answer complex questions that traditional RAG systems cannot handle.
+
+**Part of the SWYL (Share What You Learn) series.**
+
+## About This Series
+
+Traditional RAG excels at semantic similarity but fails with:
+- Geographical reasoning ("within 10km")
+- Relationship traversal (connecting entities across documents)
+- Numerical filtering (">$50M investments")
+- Multi-document synthesis
+
+This series explores how Graph RAG solves these problems by modeling relationships between entities in a knowledge graph, then combining vector search with graph traversal.
+
+**Inspired by**: [DeepLearning.AI's Knowledge Graphs for RAG course](https://learn.deeplearning.ai/courses/knowledge-graphs-rag/)
+
+## Series Roadmap
+
+**Current**: Knowledge Graph Fundamentals (using movie dataset)
+- Nodes, relationships, and Cypher query language
+- Pattern matching and aggregations
+- Path finding and centrality metrics
+
+**Coming Next**:
+1. Building SEC Knowledge Graphs - Chunking Form 10-K, creating embeddings
+2. Relationship modeling - Connecting chunks, forms, preserving hierarchy
+3. Multi-document integration - Form 13-F investment data
+4. Advanced retrieval - Chunk windows, geospatial queries, context expansion
+5. LLM-powered queries - Natural language to Cypher generation
 
 ## Setup
 
