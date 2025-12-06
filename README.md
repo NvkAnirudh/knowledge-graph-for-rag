@@ -1,8 +1,6 @@
-# graph_rag
+# Graph RAG Learning Series
 
-## Description
-
-Add your project description here.
+Learning Graph RAG fundamentals using Neo4j and Cypher query language. Part of the SWYL (Share What You Learn) series.
 
 ## Setup
 
@@ -26,20 +24,28 @@ uv pip install -e .
 4. Set up environment variables:
 ```bash
 cp .env.example .env
-# Edit .env and add your API keys
+# Add your Neo4j credentials and OpenAI API key
 ```
 
-## Usage
+## What's Inside
 
-Add usage instructions here.
+### Movie Knowledge Graph Analysis
+- **Notebook**: `src/graph_rag/l2-query-with-cypher.ipynb`
+- **Dataset**: 7 movies, 38 people (actors, directors, producers, writers)
+- **Queries**: 9 Cypher queries (Easy → Medium → Hard)
+- **Topics**: Pattern matching, aggregations, path finding, centrality metrics, multi-role analysis
 
-## Development
+### Key Learnings
+- MATCH vs OPTIONAL MATCH (INNER JOIN vs LEFT JOIN)
+- COLLECT() + DISTINCT to avoid Cartesian products
+- Degree centrality vs Betweenness centrality
+- Analyzing disconnected graph components
+- UNWIND for processing arrays
 
-Install development dependencies:
-```bash
-uv pip install -e ".[dev]"
-```
+## Next Steps
 
-## License
-
-Add license information here.
+Moving from movies to SEC filings:
+- Chunking Form 10-K documents
+- Creating vector embeddings
+- Building financial knowledge graphs
+- Combining vector search with graph traversal
