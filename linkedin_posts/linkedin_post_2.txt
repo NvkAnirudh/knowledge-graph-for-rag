@@ -1,0 +1,58 @@
+Kicking off SWYL Graph RAG series - combining vector search with relationship traversal to answer questions traditional RAG can't handle.
+
+Starting with Knowledge Graph Fundamentals: nodes, relationships, Cypher query language.
+
+𝘛𝘰 𝘭𝘦𝘢𝘳𝘯 𝘧𝘶𝘯𝘥𝘢𝘮𝘦𝘯𝘵𝘢𝘭𝘴, 𝘐'𝘮 𝘸𝘰𝘳𝘬𝘪𝘯𝘨 𝘸𝘪𝘵𝘩 𝘢 𝘮𝘰𝘷𝘪𝘦 𝘬𝘯𝘰𝘸𝘭𝘦𝘥𝘨𝘦 𝘨𝘳𝘢𝘱𝘩:
+- 7 𝘔𝘰𝘷𝘪𝘦𝘴: 𝘔𝘢𝘵𝘳𝘪𝘹 𝘵𝘳𝘪𝘭𝘰𝘨𝘺, 𝘛𝘰𝘱 𝘎𝘶𝘯, 𝘑𝘦𝘳𝘳𝘺 𝘔𝘢𝘨𝘶𝘪𝘳𝘦, 𝘈 𝘍𝘦𝘸 𝘎𝘰𝘰𝘥 𝘔𝘦𝘯, 𝘋𝘦𝘷𝘪𝘭'𝘴 𝘈𝘥𝘷𝘰𝘤𝘢𝘵𝘦
+- 38 𝘗𝘦𝘰𝘱𝘭𝘦: 𝘈𝘤𝘵𝘰𝘳𝘴, 𝘥𝘪𝘳𝘦𝘤𝘵𝘰𝘳𝘴, 𝘱𝘳𝘰𝘥𝘶𝘤𝘦𝘳𝘴, 𝘸𝘳𝘪𝘵𝘦𝘳𝘴
+- 𝘙𝘦𝘭𝘢𝘵𝘪𝘰𝘯𝘴𝘩𝘪𝘱𝘴: 𝘈𝘊𝘛𝘌𝘋_𝘐𝘕, 𝘋𝘐𝘙𝘌𝘊𝘛𝘌𝘋, 𝘗𝘙𝘖𝘋𝘜𝘊𝘌𝘋, 𝘞𝘙𝘖𝘛𝘌
+
+Here's a query that stumped me:
+
+MATCH (keanu:Person {name: 'Keanu Reeves'})-[:ACTED_IN]->(movie)
+MATCH (movie)<-[:DIRECTED]-(director)
+MATCH (movie)<-[:PRODUCED]-(producer)
+RETURN movie.title, director.name, producer.name
+
+𝘌𝘹𝘱𝘦𝘤𝘵𝘦𝘥: 4 𝘮𝘰𝘷𝘪𝘦𝘴. 𝘈𝘤𝘵𝘶𝘢𝘭: 𝘌𝘮𝘱𝘵𝘺.
+
+𝗧𝗵𝗲 𝗰𝘂𝗹𝗽𝗿𝗶𝘁: 𝗠𝗔𝗧𝗖𝗛 𝘃𝘀 𝗢𝗣𝗧𝗜𝗢𝗡𝗔𝗟 𝗠𝗔𝗧𝗖𝗛
+
+MATCH is like SQL INNER JOIN. ALL relationships must exist.
+
+Devil's Advocate has director but no producer. MATCH fails.
+
+Fix? OPTIONAL MATCH (LEFT JOIN):
+
+MATCH (keanu:Person {name: 'Keanu Reeves'})-[:ACTED_IN]->(movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(director)
+OPTIONAL MATCH (movie)<-[:PRODUCED]-(producer)
+RETURN movie.title, COLLECT(DISTINCT director.name), COLLECT(DISTINCT producer.name)
+
+𝗪𝗵𝘆 𝗖𝗢𝗟𝗟𝗘𝗖𝗧()?
+
+Without aggregation: Cartesian products. Matrix: 2 directors + 1 producer = 2 duplicate rows.
+
+COLLECT() groups into arrays. DISTINCT removes duplicates. One row per movie.
+
+Essential for Graph RAG where not all entities have relationships.
+
+𝗪𝗵𝗮𝘁 𝗜 𝗯𝘂𝗶𝗹𝘁:
+
+9 queries: pattern matching, path finding, UNWIND, centrality metrics, multi-role analysis.
+
+Most interesting: TWO disconnected components (Tom Cruise vs Keanu). Tom in 255 shortest paths - ONLY bridge connecting his clusters.
+
+Lesson: High centrality misleads in disconnected graphs. Visualize first.
+
+SEC relevance: Investment networks have disconnected components. Graph structure crucial.
+
+𝗡𝗲𝘅𝘁:
+
+SEC filings - chunking 10-K, embeddings, financial graphs, vector + traversal.
+
+Goal: "Which firms near Palo Alto Networks invested >$50M, what risks disclosed?"
+
+Notebook on GitHub. Part of SWYL series.
+
+#GraphRAG #Cypher #Neo4j #KnowledgeGraphs #DataScience #FinancialData #LLM #RAG
