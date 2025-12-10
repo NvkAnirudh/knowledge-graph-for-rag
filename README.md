@@ -1,6 +1,6 @@
 # Graph RAG: Knowledge Graphs + Retrieval Augmented Generation
 
-Combining knowledge graphs with retrieval augmented generation to answer complex questions that traditional RAG systems cannot handle. This project explores how Graph RAG solves multi-hop reasoning, relationship traversal, and structured querying challenges through a series of practical implementations.
+Combining knowledge graphs with retrieval augmented generation to answer complex questions that traditional RAG systems cannot handle. This project explores how Graph RAG solves multi-hop reasoning, relationship traversal, and structured querying challenges using SEC 10-K filings and other real-world datasets.
 
 **Part of the SWYL (Share What You Learn) series.**
 
