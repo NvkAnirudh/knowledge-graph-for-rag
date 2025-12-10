@@ -89,7 +89,7 @@ cp .env.example .env
 
 Follow along with the learning journey on LinkedIn:
 
-- **Part 1**: [Knowledge Graph Fundamentals with Cypher](linkedin_posts/linkedin_post_2.txt) - The OPTIONAL MATCH discovery and centrality metrics
+- **Part 1**: [Knowledge Graph Fundamentals with Cypher](https://www.linkedin.com/posts/nvkanirudh_graphrag-cypher-neo4j-activity-7402867081190199297-G3DQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAABTJkfkB0AZ9EMZIugsIAhfg4E1RAYRjfe0) - The OPTIONAL MATCH discovery and centrality metrics
 - **Part 2**: [Building Knowledge Graphs from SEC Filings](linkedin_posts/linkedin_post_3.txt) - Document chunking, vector embeddings, and the hallucination problem
 - **Part 3**: *Coming soon* - Entity extraction and relationship modeling
 
