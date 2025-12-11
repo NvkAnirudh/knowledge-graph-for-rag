@@ -22,8 +22,8 @@ This series explores how Graph RAG solves these problems by modeling relationshi
 |------|------|-------------|----------|
 | **Part 1** | **Knowledge Graph Fundamentals** | Learn Cypher query language using a movie dataset:<br>• Pattern matching, aggregations, and path finding<br>• Centrality metrics and multi-role analysis<br>• MATCH vs OPTIONAL MATCH<br>• COLLECT() to avoid Cartesian products<br>• Analyzing disconnected graph components | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](src/graph_rag/movies_dataset/query-with-cypher.ipynb) |
 | **Part 2** | **Building Knowledge Graphs from Text** | Transform unstructured SEC 10-K filings into a queryable knowledge graph:<br>• Document chunking strategies<br>• Graph node creation with Cypher MERGE<br>• Vector embeddings with OpenAI<br>• Neo4j vector indexing<br>• Complete RAG pipeline with LangChain<br>• Hallucination testing and prompt engineering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](src/graph_rag/SEC_dataset/construct-kg-from-text.ipynb) |
-| **Part 3** | **Adding Relationships to the Knowledge Graph** | *Coming soon* - Structure the graph with document relationships:<br>• Create NEXT relationships for linked lists of chunks<br>• Connect chunks to Form nodes with PART_OF relationships<br>• Add SECTION relationships for navigation<br>• Implement chunk windows for expanded context retrieval | *Coming soon* |
-| **Part 4** | **Hybrid Queries: Vector Search + Graph Traversal** | *Coming soon* - Combine vector similarity with graph traversal:<br>• Answer complex multi-hop questions<br>• Example: "Which competitors of NetApp disclosed AI risks and invested >$50M in R&D?"<br>• Filter by metadata (year, section, company) | *Coming soon* |
+| **Part 3** | **Adding Relationships to the Knowledge Graph** | Structure the graph with document relationships:<br>• Create Form nodes to represent 10-K documents<br>• Build linked lists with NEXT relationships between sequential chunks<br>• Connect chunks to forms using PART_OF relationships<br>• Add SECTION relationships for direct navigation to first chunks<br>• Implement variable-length path patterns (`[:NEXT*0..1]`)<br>• Expand context with chunk window retrieval queries | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](src/graph_rag/SEC_dataset/add-relationships-to-kg.ipynb) |
+| **Part 4** | **Expanding the SEC Knowledge Graph** | *Coming soon* - Integrate Form 13-F investment data:<br>• Create Manager and Company nodes from SEC filings<br>• Build OWNS_STOCK_IN relationships with investment details<br>• Connect multi-document knowledge (Company → Form → Chunks)<br>• Implement full-text search on manager names<br>• Cross-document context expansion for RAG<br>• Generate structured sentences from graph patterns | *Coming soon* |
 | **Part 5** | **Advanced Retrieval Patterns** | *Coming soon* - Production-grade Graph RAG techniques:<br>• Chunk windows and parent-child relationships<br>• Geospatial queries<br>• Context expansion techniques | *Coming soon* |
 | **Part 6** | **Natural Language to Cypher** | *Coming soon* - Build an intelligent query interface:<br>• Use LLMs to generate Cypher from natural language<br>• Error handling and query validation | *Coming soon* |
 
@@ -91,26 +91,22 @@ Follow along with the learning journey on LinkedIn:
 
 - **Part 1**: [Knowledge Graph Fundamentals with Cypher](https://www.linkedin.com/posts/nvkanirudh_graphrag-cypher-neo4j-activity-7402867081190199297-G3DQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAABTJkfkB0AZ9EMZIugsIAhfg4E1RAYRjfe0) - The OPTIONAL MATCH discovery and centrality metrics
 - **Part 2**: [Building Knowledge Graphs from SEC Filings](linkedin_posts/linkedin_post_3.txt) - Document chunking, vector embeddings, and the hallucination problem
-- **Part 3**: *Coming soon* - Adding relationships and chunk windows
+- **Part 3**: *Coming soon* - Graph relationships, variable-length paths, and context window retrieval
 
 ## What's Next?
 
-### Part 3: Adding Relationships to the Knowledge Graph
-- Create Form nodes representing 10-K documents
-- Connect chunks with NEXT relationships (linked lists by section)
-- Link chunks to forms with PART_OF relationships
-- Add SECTION relationships for direct navigation to first chunks
-- Implement chunk windows using variable-length path patterns
-- Expand context retrieval with adjacent chunks
-
-### Part 4: Hybrid Queries
-- Combine vector similarity with graph traversal in single queries
-- Answer complex questions: "Which competitors of NetApp disclosed AI risks?"
-- Implement filtering by metadata (year, section, company)
-- Explore sequential chunk reading and context expansion
+### Part 4: Expanding the SEC Knowledge Graph
+Integrate Form 13-F investment data to expand context:
+- Add institutional investment manager data (561 Manager nodes)
+- Create Company nodes and connect to existing Form nodes
+- Build OWNS_STOCK_IN relationships with investment details (value, shares, reporting quarter)
+- Implement full-text search indexes for manager keyword queries
+- Cross-document context expansion (Chunk → Form → Company → Managers)
+- Create structured sentences from graph patterns for enhanced RAG responses
 
 ### Part 5 & Beyond
-- Multi-document knowledge graphs (integrate Form 13-F investment data)
-- Temporal analysis (year-over-year risk disclosure changes)
-- Advanced retrieval patterns (chunk windows, parent-child relationships)
+- Advanced multi-hop queries combining vector search and graph traversal
+- Geospatial queries (find managers within distance of companies)
+- Temporal analysis (year-over-year investment changes)
 - Natural language to Cypher generation with LLMs
+- Production optimization and scaling strategies
